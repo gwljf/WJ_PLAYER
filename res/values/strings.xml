@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WJ_PLAYER</string>
+    <string name="open_file">Open File</string>
+    <string name="storage_path">/storage</string>
+</resources>
