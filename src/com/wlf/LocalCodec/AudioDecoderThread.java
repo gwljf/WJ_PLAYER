@@ -162,7 +162,6 @@ public class AudioDecoderThread extends Thread {
         mDecoder.stop();
         mDecoder.release();
         mDecoder = null;
-
         mExtractor.release();
         mExtractor = null;
     }
