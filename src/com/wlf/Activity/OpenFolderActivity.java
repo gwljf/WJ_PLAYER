@@ -1,5 +1,6 @@
 package com.wlf.Activity;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ public class OpenFolderActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.openfolder_layout);
 
         listview = (ListView) findViewById(R.id.listview);
@@ -35,7 +37,7 @@ public class OpenFolderActivity extends Activity {
         upListView(path, listview);
     }
 
-    public void upListView (String path, final ListView listview) {
+    public void upListView (final String path, final ListView listview) {
 
         File file = new File(path);
         File[] files = file.listFiles();
@@ -57,8 +59,14 @@ public class OpenFolderActivity extends Activity {
                     pathStack.push(pathStack.peek() + "/" + item);
                     upListView(pathStack.peek(), listview);
                 } else {
-                    Intent intent = new Intent(OpenFolderActivity.this, ScreenActivity.class);
-                    startActivity(intent);
+                    String path = pathStack.peek()+"/"+item;
+                    if (path.endsWith(".mp4")) {
+                        Intent intent = new Intent(OpenFolderActivity.this, ScreenActivity.class);
+                        intent.putExtra("file", path);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(OpenFolderActivity.this, "Not support this format", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });
